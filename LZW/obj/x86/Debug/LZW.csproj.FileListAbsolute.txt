@@ -1,0 +1,5 @@
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.exe
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.pdb
+C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.exe
+C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.pdb
+C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.csprojResolveAssemblyReference.cache

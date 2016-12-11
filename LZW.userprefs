@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{6F6DA269-95B4-4671-9E78-CA9B0BD942A9}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ActiveRuntime="MS.NET" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\andre\Documents\Projects\LZW\LZW\FileManage.cs" line="150" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="LZW\FileManage.cs">
+    <Files>
+      <File FileName="LZW\Program.cs" Line="13" Column="45" />
+      <File FileName="LZW\FileManage.cs" Line="151" Column="1" />
+      <File FileName="LZW\LZW_Compress.cs" Line="124" Column="18" />
+      <File FileName="LZW\LZW_Decompress.cs" Line="104" Column="19" />
+      <File FileName="LZW\Test.cs" Line="30" Column="1" />
+      <File FileName="LZW\File_LZW.cs" Line="12" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.LZW PreferredExecutionTarget="MonoDevelop.Default" />
+</Properties>
