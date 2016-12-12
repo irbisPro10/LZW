@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 namespace LZW
 {
 	public class FileManage: File_LZW
@@ -10,7 +9,6 @@ namespace LZW
 		string tail;
 		string prefix;
 		string current;
-		Test t;
 		string temp;
 
 		LZW_Compress lzw = new LZW_Compress();
@@ -22,12 +20,12 @@ namespace LZW
 		{
 			input_path = inp;
 			output_path = otp;
-			t = new Test(input_path);
+
 		}
 
 		// Архивация единичного файла
 
-		public void SingleFileCompress()
+		public void SingleFileCompress(string file_path)
 		{
 			string test;
 			lzw.NumberOfBits(input_path); //программа высчитывает количество битов выхожной записи. В класси LZW_Compress заполняется поле minBits
@@ -41,7 +39,7 @@ namespace LZW
 				using (fileStream)
 				{
 					WriteNumBits();
-					WriteName("test1.txt");
+					WriteName(file_path);
 					tail = null;
 
 					lzw.Current = AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
@@ -67,12 +65,23 @@ namespace LZW
 
 				}
 					WriteLastByte();
-				
+
+					current = null;
+					tail = null;
+					lzw.current = null;
+					lzw.Current = null;
+					lzw.Next = null;
+					lzw.next = null;
+					lzw.DIC_CLEAN();
+					fileStream.Close();
+					
+					
 			}
 		}
 
 		public void WriteName(string FileExtention)
 		{
+			FileExtention = Transliteration.Front(FileExtention);
 			char [] arr = FileExtention.ToCharArray(0, FileExtention.Length);
 			for (var i = 0; i < FileExtention.Length; i++)
 				{
@@ -114,12 +123,14 @@ namespace LZW
 		//если нет присоединяет к последующему 
 		public void WriteLastByte()
 		{
-			tail += "100000000";
-			int a = lzw.MinNumBit-tail.Length;
+
+			string end = "100000000";
+			int a = lzw.MinNumBit-9;
 			for (var i = 0; i < a; i++)
 			{
-				tail = "0"+tail;
+				end = "0"+end;
 			}
+			tail += end;
 
 			using (fileStream = new FileStream(output_path, FileMode.Append))
 			{
@@ -133,7 +144,7 @@ namespace LZW
 		//разархивация файла
 
 		LZW_Decompress lwz_decompress = new LZW_Decompress();
-		public void FilesDeCompress()
+		public void FilesDeCompress(string output_)
 		{
 
 			FileStream fs_ = File.Open(output_path, FileMode.Open, FileAccess.Read);
@@ -161,9 +172,10 @@ namespace LZW
 					}
 
 					fE = fE.Remove(fE.Length - 1, 1);
-
-					Console.WriteLine(fE);
-					output_path = "C:/новая папка/" + fE;
+					output_path = output_ +fE;
+					Console.WriteLine(output_path);
+					String PathToCreate = Path.GetDirectoryName(output_path);
+					DirectoryInfo di = Directory.CreateDirectory(PathToCreate);
 					bool check;
 					check = singleFileDecompess(fE, fs_);
 
@@ -206,6 +218,8 @@ namespace LZW
 						lwz_decompress.Next = null;
 						lwz_decompress.bitsInSeria = 0;
 						lwz_decompress.INDEX = 257;
+						current = null;
+						temp = null;
 						return true;
 					}
 					else {
@@ -234,14 +248,16 @@ namespace LZW
 			{
 
 				//Console.Write(current.Substring(0, lwz_decompress.bitsInSeria)+"|");
+				lwz_decompress.Next = current.Substring(0, lwz_decompress.bitsInSeria);
+				String outPut = OutPutBytesDecode();
 				if ((Convert.ToInt32(current.Substring(0, lwz_decompress.bitsInSeria) ,2)==256))
 				{
 					Console.WriteLine("\n\nКонец файла");
-					return  "-2";
+					outPut = "-2";
 				}
 				//t.DB = Convert.ToInt32(current.Substring(0, lwz_decompress.bitsInSeria), 2);
-				lwz_decompress.Next = current.Substring(0, lwz_decompress.bitsInSeria);
-				return OutPutBytesDecode();
+
+				return outPut;
 			}			
 		}
 
@@ -296,104 +312,5 @@ namespace LZW
 			current = current.Remove(0, lwz_decompress.bitsInSeria);
 			return current;
 		}
-
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		//Часть кода реализующая поиск в глубину по дереву для получения пктей всех фалов содержащихся в папке для сжатия
-		public List<string> getFilePaths(string path)
-		{
-			List<string> files = new List<string>();
-			Stack<string> Visited = new Stack<string>();
-			Stack<string> Way = new Stack<string>();
-			string current_dir = path;  //first v
-
-			TreeGO(current_dir, files, Visited, Way);
-
-			return files;
-		}
-
-		public List<string> ArrToList(string[] Arr)
-		{
-			List<string> result = new List<string>();
-			foreach (var c in Arr)
-			{
-				result.Add(c);
-			}
-
-			return result;
-		}
-
-		public void AddFilesFromDir(List<string> files, string[] Arr)
-		{
-			foreach (var c in Arr)
-			{
-				files.Add(c);
-			}
-		}
-
-		public void TreeGO(string current_dir, List<string> files, Stack<string> Visited, Stack<string> Way)
-		{
-			Console.WriteLine(current_dir);
-			// get all leaves
-			List<string> current_dirs = ArrToList(Directory.GetDirectories(current_dir));//get all adjacent nodes
-			Visited.Push(current_dir);
-			EnableToGo(current_dirs, Visited);
-			if (!Way.Contains(current_dir))
-			{
-				Way.Push(current_dir);
-				AddFilesFromDir(files, Directory.GetFiles(current_dir));
-			}
-			if (current_dirs.Count == 0)
-			{
-
-				Way.Pop();
-				if (Way.Count > 0)
-				{
-					TreeGO(Way.Peek(), files, Visited, Way);
-				}
-				else
-				{
-					Console.WriteLine("Поиск завершен");
-				}
-			}
-			else
-			{
-
-
-				TreeGO(current_dirs[0], files, Visited, Way);
-			}
-		}
-
-		public void EnableToGo(List<string> current_dirs, Stack<string> Visited)
-		{
-			if (current_dirs.Count > 0)
-			{
-				foreach (var c in Visited)
-				{
-					if (current_dirs.Contains(c))
-					{
-						current_dirs.Remove(c);
-					}
-				}
-			}
-
-		}
-
-
-
-
 	}
 }

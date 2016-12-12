@@ -55,7 +55,7 @@ namespace LZW
 
 
 		//считает количество бит в выходной серии 
-		public void NumberOfBits(string input_path)
+		public int NumberOfBits(string input_path)
 		{
 			FileStream fs = File.Open(input_path, FileMode.Open, FileAccess.Read);
 
@@ -91,6 +91,7 @@ namespace LZW
 			Console.WriteLine(minBits);
 			//Console.ReadKey();
 			minBits = Convert.ToUInt16( Math.Ceiling(Math.Log((minBits), 2)));
+			return minBits;
 		}
 
 

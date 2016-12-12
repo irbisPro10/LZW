@@ -30,6 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -37,8 +40,13 @@
     <Compile Include="LZW_Compress.cs" />
     <Compile Include="FileManage.cs" />
     <Compile Include="LZW_Decompress.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="File_LZW.cs" />
+    <Compile Include="FileFinder.cs" />
+    <Compile Include="Transliteration.cs" />
+    <Compile Include="LZWTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,8 +10,8 @@ namespace LZW
 		public static void Main(string[] args)
 		{
 			//string input_path = args[0];
-			string input_path = "C:/новая папка/test.txt";
-			//string input_path_ = "C:/новая папка";
+			string input_path = "C:/новая папка/jquery.js";
+			string input_path_ = "C:\\новая папка\\";
 			//string output_path = args[1];
 			string output_path = "C:/новая папка/test.lzw";
 			//string decompresed_path = args[2];
@@ -20,53 +20,56 @@ namespace LZW
 				Console.WriteLine("ARG:" +a);
 			*/
 
-			FileManage lzw = new FileManage(input_path, output_path);
-
-			if (File.Exists(input_path))
+			Console.WriteLine("Введите с если хотите выбрать режим сжатия");
+			string type = Console.ReadLine();
+			if (type == "c")
 			{
-				/*FileStream fs = File.Open(input_path, FileMode.Open, FileAccess.Read);
-				using (fs)
+				Console.WriteLine("Введите путь к файлу или папке для сжатия");
+				input_path_ = Console.ReadLine();
+
+				Console.WriteLine("Введите путь к для сжатого файла");
+				output_path = Console.ReadLine();
+				if (File.Exists(input_path_))
 				{
-					for (var i = 0; i < fs.Length; i++)
-					
+					FileManage lzw = new FileManage(input_path_, output_path+"lzw.lzw");		
+					lzw.SingleFileCompress(Path.GetFileName(input_path_));
+				}
+
+				else
+				{
+
+					if (Directory.Exists(input_path_))
 					{
-						if (i<150)
-						Console.Write(fs.ReadByte()+"|");
+
+						FileFinder ff = new FileFinder(input_path_);
+						List<string> files_paths = ff.getFilePaths();
+						foreach (var i in files_paths)
+						{
+							FileManage lzw = new FileManage(i, output_path);
+							lzw.SingleFileCompress(i.Remove(0, input_path_.Length + 1));
+							lzw = null;
+						}
+
+
 					}
-
-					Console.WriteLine();
-				}*/
-
-					//lzw.SingleFileCompress();
+					else { Console.WriteLine("Такой дирректории не существует"); }
+				}
 			}
+			else
+			{	Console.WriteLine("Введите путь к файлу для распаковки");
+				output_path = Console.ReadLine();
+				if (File.Exists(output_path))
+				{
+					
+					Console.WriteLine("Введите дирректорию для распаковки");
+					string output_ = Console.ReadLine();
+					FileManage lzw = new FileManage(" ", output_path);
+					lzw.FilesDeCompress(output_);
 
-			else { Console.WriteLine("Такой файл не существует"); }
-		
-			/*
+				}
 
-			if (Directory.Exists(input_path_))
-			{
-				List<string> files_paths = in_p.getFilePaths(input_path_);
-				foreach (var i in files_paths)
-					Console.WriteLine(i);
-
+				else { Console.WriteLine("Такой файл не существует"); }
 			}
-
-			
-			else { Console.WriteLine("Такой дирректории не существует"); }
-			*/
-
-			if (File.Exists(output_path))
-			{
-				Console.WriteLine("\nfirst byte");
-				lzw.FilesDeCompress();
-
-			}
-
-			else { Console.WriteLine("Такой файл не существует"); }
-			//File.WriteAllText(decompresed_path, t, System.Text.Encoding.ASCII);
-
-
 
 			Console.ReadKey();
 		}
