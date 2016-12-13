@@ -7,10 +7,10 @@ namespace LZW
 	[TestFixture]
 	public class LZWTests
 	{
-		string path = "C:\\Users\\andre\\Documents\\LZW\\LZW\\bin\\Debug\\file_for_tests.txt";//тестируемый файл
-		string path1 = "C:\\Users\\andre\\Documents\\LZW\\LZW\\bin\\Debug\\file_for_tests.lzw";//файл вывода
-		string path2 = "C:\\Users\\andre\\Documents\\LZW\\LZW\\bin\\Debug\\file.txt";//файл вывода
-		string dir = "C:\\Users\\andre\\Documents\\LZW\\LZW\\bin\\Debug\\";//текущая дирректория
+		string path = "C:\\Users\\andre\\Documents\\Projects\\LZW\\LZW\\bin\\Debug\\file_for_tests.txt";//тестируемый файл
+		string path1 = "C:\\Users\\andre\\Documents\\Projects\\LZW\\LZW\\bin\\Debug\\file_for_tests.lzw";//файл вывода
+		string path2 = "C:\\Users\\andre\\Documents\\Projects\\LZW\\LZW\\bin\\Debug\\file.txt";//файл вывода
+		string dir = "C:\\Users\\andre\\Documents\\Projects\\LZW\\LZW\\bin\\Debug\\";//текущая дирректория
 		LZW_Compress lc = new LZW_Compress();
 
 
@@ -66,14 +66,15 @@ namespace LZW
 			Assert.AreEqual(test_arr.Length, 18);
 		}
 
+		//Тест поиска фалов в папке
 		[Test]
 		public void FileSearch()
 		{
-			string Finddir = "C:\\Users\\andre\\Documents\\LZW\\LZW";
+			string Finddir = "C:\\Users\\andre\\Documents\\Projects\\LZW\\LZW";
 			FileFinder ff = new FileFinder(Finddir);
 			List<string> files = ff.getFilePaths();
 
-			Assert.AreEqual(files.Count, 28);
+			Assert.AreEqual(files.Count, 26);
 		}
 	}
 }

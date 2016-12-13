@@ -1,4 +1,4 @@
-﻿<Properties StartupConfiguration="{6F6DA269-95B4-4671-9E78-CA9B0BD942A9}|Default">
+﻿<Properties StartupConfiguration="{6F6DA269-95B4-4671-9E78-CA9B0BD942A9}|Модульные тесты">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" ActiveRuntime="MS.NET" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -12,6 +12,7 @@
       <File FileName="LZW\LZW_Decompress.cs" Line="44" Column="1" />
       <File FileName="LZW\File_LZW.cs" Line="9" Column="3" />
       <File FileName="LZW\FileFinder.cs" Line="48" Column="6" />
+      <File FileName="LZW\LZWTests.cs" Line="78" Column="4" />
       <File FileName="Состояние: LZW" />
     </Files>
   </MonoDevelop.Ide.Workbench>
