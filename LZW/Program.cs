@@ -20,9 +20,9 @@ namespace LZW
 				Console.WriteLine("ARG:" +a);
 			*/
 
-			Console.WriteLine("Введите с если хотите выбрать режим сжатия");
+			Console.WriteLine("Введите '-с' если хотите выбрать режим сжатия \nВведите '-d' если хотите выбрать режим расжатия");
 			string type = Console.ReadLine();
-			if (type == "c")
+			if (type == "-c")
 			{
 				Console.WriteLine("Введите путь к файлу или папке для сжатия");
 				input_path_ = Console.ReadLine();
@@ -45,7 +45,7 @@ namespace LZW
 						List<string> files_paths = ff.getFilePaths();
 						foreach (var i in files_paths)
 						{
-							FileManage lzw = new FileManage(i, output_path);
+							FileManage lzw = new FileManage(i, output_path+"lzw.lzw");
 							lzw.SingleFileCompress(i.Remove(0, input_path_.Length + 1));
 							lzw = null;
 						}
@@ -55,7 +55,8 @@ namespace LZW
 					else { Console.WriteLine("Такой дирректории не существует"); }
 				}
 			}
-			else
+
+			if(type == "-d")
 			{	Console.WriteLine("Введите путь к файлу для распаковки");
 				output_path = Console.ReadLine();
 				if (File.Exists(output_path))

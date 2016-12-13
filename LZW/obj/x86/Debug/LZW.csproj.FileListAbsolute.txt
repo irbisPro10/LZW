@@ -21,3 +21,5 @@ C:\Users\andre\Documents\LZW\LZW\bin\Debug\nunit.framework.xml
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.csprojResolveAssemblyReference.cache
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.exe
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.pdb
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\nunit.framework.dll
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\nunit.framework.xml

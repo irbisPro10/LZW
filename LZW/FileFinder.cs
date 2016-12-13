@@ -45,7 +45,7 @@ namespace LZW
 
 		public void TreeGO(string current_dir, List<string> files, Stack<string> Visited, Stack<string> Way)
 		{
-			Console.WriteLine(current_dir);
+			//Console.WriteLine(current_dir);
 			// get all leaves
 			List<string> current_dirs = ArrToList(Directory.GetDirectories(current_dir));//get all adjacent nodes
 			Visited.Push(current_dir);
