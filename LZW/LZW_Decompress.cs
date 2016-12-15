@@ -7,10 +7,6 @@ namespace LZW
 		int Index = 257;
 		int BitsInSeria;
 
-		public LZW_Decompress()
-		{
-
-		}
 
 		public int bitsInSeria
 		{
@@ -51,17 +47,6 @@ namespace LZW
 
 			if (dictionary.ContainsKey(Convert.ToInt32(next, 2)))
 			{
-				/*	if (!dictionary.ContainsKey(Convert.ToInt32(current + next, 2)))
-					{
-
-						dictionary.Add(Index, current + current);
-						Index++;
-						result = current + current;
-						//current += current; 
-					}
-
-				else
-				{*/
 				next = dictionary[Convert.ToInt32(next, 2)].ToString();
 				if (dictionary.Count < 3839)
 				{
@@ -77,12 +62,9 @@ namespace LZW
 				current = next;
 				//}
 			}
+
 			else
-			{/*
-				if (Index > 340)
-				{
-					Console.Write("*");
-				}*/
+			{
 				if (Convert.ToInt32(next, 2) == Index)
 				{
 					if (dictionary.Count < 3839)
@@ -99,6 +81,7 @@ namespace LZW
 
 					current = dictionary[Convert.ToInt32(next, 2)].ToString();
 				}
+
 				else
 				{
 					if (dictionary.Count < 3839)
@@ -106,6 +89,7 @@ namespace LZW
 						dictionary.Add(Index, current + next.Substring(0, this.bitsInSeria));
 						Index++;
 					}
+
 					else
 					{
 						dictionary.Clear();
@@ -114,8 +98,8 @@ namespace LZW
 					result = current;
 					current = next;
 				}
+			
 			}
-				
 				return result;
 			
 		}

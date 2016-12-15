@@ -49,27 +49,23 @@ namespace LZW
 			index = 257;
 		}
 
-		public LZW_Compress()
-		{
-		}
-
-
+	
 		//считает количество бит в выходной серии 
 		public int NumberOfBits(string input_path)
 		{
 			FileStream fs = File.Open(input_path, FileMode.Open, FileAccess.Read);
 
 			fs.Seek(0, SeekOrigin.Begin);
-			File_LZW fl =new File_LZW();
+
 			using (fs)
 			{
 
-				current = fl.AddNullInFront( Convert.ToString(fs.ReadByte(), 2),8);
+				current = File_LZW.AddNullInFront( Convert.ToString(fs.ReadByte(), 2),8);
 
 				for (int i = 0; i < fs.Length; i++)
 				{
 					
-					next = fl.AddNullInFront(Convert.ToString(fs.ReadByte(), 2),8);
+					next = File_LZW.AddNullInFront(Convert.ToString(fs.ReadByte(), 2),8);
 
 					curent_byte = MinBitCounter();
 					if (curent_byte == -1)
@@ -89,7 +85,7 @@ namespace LZW
 			}
 
 			Console.WriteLine(minBits);
-			//Console.ReadKey();
+
 			minBits = Convert.ToUInt16( Math.Ceiling(Math.Log((minBits), 2)));
 			return minBits;
 		}
@@ -98,6 +94,7 @@ namespace LZW
 		public int MinBitCounter()
 		{
 			int n;
+
 			if (dictionary.Contains(current + next))
 			{
 				current = current + next;
@@ -114,6 +111,7 @@ namespace LZW
 				{
 					n = Convert.ToUInt16(current, 2);
 				}
+
 				if (dictionary.Count < 3839)
 				{
 					dictionary.Add(current + next, index);
@@ -124,10 +122,13 @@ namespace LZW
 					dictionary.Clear();
 					index = 257;
 				}
+
 				current = next;
+
 				return n;
 			}
 		}
+
 		//возвращает серию для записи
 		public virtual string OutPutSymb()
 		{
@@ -165,8 +166,7 @@ namespace LZW
 
 					return result;
 				}
-			
-
 		}
+
 	}
 }

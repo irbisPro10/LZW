@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
+
 namespace LZW
 {
-	public class FileManage: File_LZW
+	public class FileManage
 	{
 		string input_path;
 		string output_path;
 		string tail;
-		string prefix;
 		string current;
 		string temp;
 
@@ -42,12 +42,12 @@ namespace LZW
 					WriteName(file_path);
 					tail = null;
 
-					lzw.Current = AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+					lzw.Current = File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 
 						for (int i = 0; i < fs_.Length; i++)
 						{
 
-						lzw.Next = AddNullInFront( Convert.ToString(fs_.ReadByte(), 2), 8);
+						lzw.Next =File_LZW.AddNullInFront( Convert.ToString(fs_.ReadByte(), 2), 8);
 							test = lzw.OutPutSymb();
 							if (test == null)
 							{
@@ -55,10 +55,7 @@ namespace LZW
 							}
 							else 
 							{
-							//if(i<250)
-							//Console.Write(Convert.ToUInt16(test) + "|");
-								//Console.Write(AddNullInFront(Convert.ToString(Convert.ToUInt16(test), 2), lzw.MinNumBit) + "|");
-								WriteInFile(AddNullInFront(Convert.ToString(Convert.ToUInt16(test), 2), lzw.MinNumBit));
+								WriteInFile(File_LZW.AddNullInFront(Convert.ToString(Convert.ToUInt16(test), 2), lzw.MinNumBit));
 							}
 						}
 
@@ -95,25 +92,24 @@ namespace LZW
 		public void WriteNumBits()
 		{
 			fileStream.WriteByte(Convert.ToByte(lzw.MinNumBit));
-
 		}
 
 
 		public void WriteInFile(string seria)
 		{
+
 			seria = tail+seria;
+
 			do
 			{
 				if (!(tail == null))
+				
 					if ((tail.Length >= 8))
 						seria = tail;
-					//Console.WriteLine();
+				
 					tail = seria.Remove(0, 8);
 					seria = seria.Substring(0, 8);
 					fileStream.WriteByte(Convert.ToByte(seria, 2));
-					//Console.WriteLine("seria "+seria+"|");
-					//Console.WriteLine("tail "+tail);
-
 			}
 			while (tail.Length >= 8);
 		}
@@ -154,8 +150,8 @@ namespace LZW
 				{
 					lwz_decompress.bitsInSeria = fs_.ReadByte();
 					string fE = null;
-					string firstPartOfDefender = AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
-					string SecondPartOfDefender = AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+					string firstPartOfDefender =File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+					string SecondPartOfDefender = File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 					string a = (firstPartOfDefender + SecondPartOfDefender).Substring(lwz_decompress.bitsInSeria - 9, 9);
 
 					//считывает первый байт количество символов
@@ -166,7 +162,7 @@ namespace LZW
 					{
 						fE += Convert.ToChar(Convert.ToInt32(SecondPartOfDefender, 2));
 						firstPartOfDefender = SecondPartOfDefender;
-						SecondPartOfDefender = AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+						SecondPartOfDefender = File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 						a = (firstPartOfDefender + SecondPartOfDefender).Substring(0, 9);
 
 					}
@@ -185,8 +181,6 @@ namespace LZW
 		}
 
 
-
-
 		public bool singleFileDecompess(string fE, FileStream fs_)
 		{
 			string tmp = null;
@@ -199,17 +193,16 @@ namespace LZW
 					//считывает первый байт файла и устанавоивает его как Current
 					for (int i = 1; i < 3; i++)
 				{
-					current += AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+					current += File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 				}
 				lwz_decompress.Current = current.Substring(0, lwz_decompress.bitsInSeria);
 
-				//Console.Write(current.Substring(0, lwz_decompress.bitsInSeria) + "|");
 				current = current.Remove(0, lwz_decompress.bitsInSeria);
 
 				//стрим основной части файла кроме последного байта
 				do
 				{
-					current += AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
+					current += File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 					tmp = separateOnSeria(current);
 					if (tmp == "-2")
 					{
@@ -247,7 +240,6 @@ namespace LZW
 			else
 			{
 
-				//Console.Write(current.Substring(0, lwz_decompress.bitsInSeria)+"|");
 				lwz_decompress.Next = current.Substring(0, lwz_decompress.bitsInSeria);
 				String outPut = OutPutBytesDecode();
 				if ((Convert.ToInt32(current.Substring(0, lwz_decompress.bitsInSeria) ,2)==256))
@@ -255,8 +247,7 @@ namespace LZW
 					Console.WriteLine("\n\nКонец файла");
 					outPut = "-2";
 				}
-				//t.DB = Convert.ToInt32(current.Substring(0, lwz_decompress.bitsInSeria), 2);
-
+			
 				return outPut;
 			}			
 		}
@@ -267,7 +258,6 @@ namespace LZW
 			do
 			{
 				result = serias.Substring(0, lwz_decompress.bitsInSeria);
-				//Console.Write(Convert.ToUInt16(result ,2) + "|");
 				serias = serias.Remove(0, lwz_decompress.bitsInSeria);
 			}
 			while (serias.Length >= lwz_decompress.bitsInSeria);
@@ -290,15 +280,7 @@ namespace LZW
 					}
 					else
 					{
-						
-						//Console.Write(Convert.ToByte(buf)+"|");
-						/*if (t.Compare(buf))
-						{
-							Console.WriteLine("Stop!");
-						}*/
-
 						FS.WriteByte(Convert.ToByte(buf));
-						
 					}
 					temp = temp.Remove(0, lwz_decompress.bitsInSeria);
 				}

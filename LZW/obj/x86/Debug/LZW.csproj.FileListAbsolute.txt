@@ -1,8 +1,3 @@
-C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.exe
-C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.pdb
-C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.exe
-C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.pdb
-C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.csprojResolveAssemblyReference.cache
 C:\Users\andre\Downloads\LZW-master\LZW-master\LZW\bin\Debug\LZW.exe
 C:\Users\andre\Downloads\LZW-master\LZW-master\LZW\bin\Debug\LZW.pdb
 C:\Users\andre\Downloads\LZW-master\LZW-master\LZW\obj\x86\Debug\LZW.exe
@@ -21,5 +16,9 @@ C:\Users\andre\Documents\LZW\LZW\bin\Debug\nunit.framework.xml
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.csprojResolveAssemblyReference.cache
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.exe
 C:\Users\andre\Documents\LZW\LZW\obj\x86\Debug\LZW.pdb
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.exe
+C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\LZW.pdb
 C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\nunit.framework.dll
 C:\Users\andre\Documents\Projects\LZW\LZW\bin\Debug\nunit.framework.xml
+C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.exe
+C:\Users\andre\Documents\Projects\LZW\LZW\obj\x86\Debug\LZW.pdb

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace LZW
 {
@@ -9,26 +8,17 @@ namespace LZW
 	{
 		public static void Main(string[] args)
 		{
-			//string input_path = args[0];
-			string input_path = "C:/новая папка/jquery.js";
-			string input_path_ = "C:\\новая папка\\";
+			string type = args[0];
+			//string input_path = args[1];
+			string input_path_ = args[1];
 			//string output_path = args[1];
-			string output_path = "C:/новая папка/test.lzw";
-			//string decompresed_path = args[2];
-			/*
-			foreach (var a in args)
-				Console.WriteLine("ARG:" +a);
-			*/
+			string output_path = args[2];
+		
 
-			Console.WriteLine("Введите '-с' если хотите выбрать режим сжатия \nВведите '-d' если хотите выбрать режим расжатия");
-			string type = Console.ReadLine();
+
 			if (type == "-c")
 			{
-				Console.WriteLine("Введите путь к файлу или папке для сжатия");
-				input_path_ = Console.ReadLine();
-
-				Console.WriteLine("Введите путь к для сжатого файла");
-				output_path = Console.ReadLine();
+				Console.WriteLine(input_path_);
 				if (File.Exists(input_path_))
 				{
 					FileManage lzw = new FileManage(input_path_, output_path+"lzw.lzw");		
@@ -50,23 +40,17 @@ namespace LZW
 							lzw = null;
 						}
 
-
 					}
 					else { Console.WriteLine("Такой дирректории не существует"); }
 				}
 			}
 
 			if(type == "-d")
-			{	Console.WriteLine("Введите путь к файлу для распаковки");
-				output_path = Console.ReadLine();
-				if (File.Exists(output_path))
+			{	
+				if (File.Exists(input_path_))
 				{
-					
-					Console.WriteLine("Введите дирректорию для распаковки");
-					string output_ = Console.ReadLine();
-					FileManage lzw = new FileManage(" ", output_path);
-					lzw.FilesDeCompress(output_);
-
+					FileManage lzw = new FileManage(" ", input_path_);
+					lzw.FilesDeCompress(output_path);
 				}
 
 				else { Console.WriteLine("Такой файл не существует"); }

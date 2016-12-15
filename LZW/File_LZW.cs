@@ -1,14 +1,11 @@
 ﻿using System;
 namespace LZW
 {
-	public class File_LZW
+	public static class File_LZW
 	{
-		public File_LZW()
-		{
-		}
-
+		
 		//добавляет количество нулей до необходимого чтобы все части потока были равны
-		public string AddNullInFront(string symb, int n)
+		public static string AddNullInFront(string symb, int n)
 		{
 			int a = n - symb.Length;
 			for (var i = 0; i < a; i++)

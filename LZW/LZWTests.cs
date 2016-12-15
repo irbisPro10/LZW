@@ -27,9 +27,9 @@ namespace LZW
 		{
 			FileManage fm = new FileManage(path, path1);
 			fm.SingleFileCompress("file.txt");
-			File_LZW fl = new File_LZW();
+
 			byte[] test_arr = File.ReadAllBytes(path1);
-			string last_seria = fl.AddNullInFront(Convert.ToString(test_arr[test_arr.Length - 2], 2),8) + fl.AddNullInFront(Convert.ToString(test_arr[test_arr.Length-1], 2), 8);
+			string last_seria = File_LZW.AddNullInFront(Convert.ToString(test_arr[test_arr.Length - 2], 2),8) + File_LZW.AddNullInFront(Convert.ToString(test_arr[test_arr.Length-1], 2), 8);
 			StringAssert.IsMatch(last_seria.Substring(5,9), "100000000");
 		}
 
@@ -37,9 +37,8 @@ namespace LZW
 		[Test]
 		public void addingNulls()
 		{
-			FileManage fm = new FileManage(path, path1);
 			string testString = "100";
-			Assert.AreEqual(fm.AddNullInFront(testString, 8), "00000100");
+			Assert.AreEqual(File_LZW.AddNullInFront(testString, 8), "00000100");
 
 		}
 
