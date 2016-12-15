@@ -65,10 +65,8 @@ namespace LZW
 
 					current = null;
 					tail = null;
-					lzw.current = null;
 					lzw.Current = null;
 					lzw.Next = null;
-					lzw.next = null;
 					lzw.DIC_CLEAN();
 					fileStream.Close();
 					
@@ -89,13 +87,13 @@ namespace LZW
 		}
 
 		//записывает количество бит в серии первым байтом
-		public void WriteNumBits()
+		private void WriteNumBits()
 		{
 			fileStream.WriteByte(Convert.ToByte(lzw.MinNumBit));
 		}
 
 
-		public void WriteInFile(string seria)
+		private void WriteInFile(string seria)
 		{
 
 			seria = tail+seria;
@@ -117,7 +115,7 @@ namespace LZW
 		//записывает 8-бит = байт потом сохранияет все оставшееся 
 		//если оставшееся больше 8 зпаисывает
 		//если нет присоединяет к последующему 
-		public void WriteLastByte()
+		private void WriteLastByte()
 		{
 
 			string end = "100000000";
@@ -140,6 +138,8 @@ namespace LZW
 		//разархивация файла
 
 		LZW_Decompress lwz_decompress = new LZW_Decompress();
+
+
 		public void FilesDeCompress(string output_)
 		{
 
@@ -181,7 +181,7 @@ namespace LZW
 		}
 
 
-		public bool singleFileDecompess(string fE, FileStream fs_)
+		private bool singleFileDecompess(string fE, FileStream fs_)
 		{
 			string tmp = null;
 
@@ -252,7 +252,7 @@ namespace LZW
 			}			
 		}
 
-		public void writeOutFile(string serias)
+		private void writeOutFile(string serias)
 		{
 			string result;
 			do
@@ -265,7 +265,7 @@ namespace LZW
 
 
 		//функция получающая разархивированные байты и записывающая их в файл
-		public string OutPutBytesDecode()
+		private string OutPutBytesDecode()
 		{
 			temp = lwz_decompress.OutPutSymb();
 			if (temp.Length >= lwz_decompress.bitsInSeria)

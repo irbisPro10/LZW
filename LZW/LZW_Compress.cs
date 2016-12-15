@@ -6,15 +6,13 @@ namespace LZW
 	public class LZW_Compress
 	{
 
-		public string current;
-		public string next;
-		public Hashtable dictionary = new Hashtable();
-		string tmp = "0";
-		int tmp_int;
-		UInt16 index = 257;
+		protected string current;
+		protected string next;
+		protected Hashtable dictionary = new Hashtable();
+		UInt32 index = 257;
 		int minBits;
 		int curent_byte;
-		//LZW_File lzwFile = new LZW_File();
+	
 
 		public string Current
 		{
@@ -80,8 +78,6 @@ namespace LZW
 					}
 
 				}
-
-
 			}
 
 			Console.WriteLine(minBits);
@@ -91,7 +87,7 @@ namespace LZW
 		}
 
 
-		public int MinBitCounter()
+		private int MinBitCounter()
 		{
 			int n;
 

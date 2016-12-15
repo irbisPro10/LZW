@@ -9,13 +9,9 @@ namespace LZW
 		public static void Main(string[] args)
 		{
 			string type = args[0];
-			//string input_path = args[1];
 			string input_path_ = args[1];
-			//string output_path = args[1];
 			string output_path = args[2];
 		
-
-
 			if (type == "-c")
 			{
 				Console.WriteLine(input_path_);

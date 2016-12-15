@@ -6,12 +6,10 @@
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Состояние: LZW">
     <Files>
-      <File FileName="LZW\Program.cs" Line="21" Column="36" />
-      <File FileName="LZW\FileManage.cs" Line="58" Column="9" />
-      <File FileName="LZW\LZW_Compress.cs" Line="68" Column="22" />
-      <File FileName="LZW\LZW_Decompress.cs" Line="10" Column="1" />
-      <File FileName="LZW\File_LZW.cs" Line="6" Column="3" />
-      <File FileName="LZW\LZWTests.cs" Line="32" Column="112" />
+      <File FileName="LZW\Program.cs" Line="11" Column="1" />
+      <File FileName="LZW\FileManage.cs" Line="247" Column="43" />
+      <File FileName="LZW\LZW_Compress.cs" Line="11" Column="12" />
+      <File FileName="LZW\LZW_Decompress.cs" Line="7" Column="6" />
       <File FileName="Состояние: LZW" />
     </Files>
   </MonoDevelop.Ide.Workbench>
