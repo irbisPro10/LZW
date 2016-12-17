@@ -23,15 +23,15 @@ namespace LZW
 		}
 
 
-		private void Zerosing(LZW_Compress obj)
+		//функция обнуляющая остатки от выполнения функции сжатия/расжатия
+		private void Zerosing(LZW_Compress obj, ref string tmp)
 		{	
 			current = null;
-			lzw.Current = null;
-			lzw.Next = null;
-			lzw.DIC_CLEAN();
-			lzw.MinNumBit = 0;
-			temp = null;
-			tail = null;
+			obj.Current = null;
+			obj.Next = null;
+			obj.DIC_CLEAN();
+			obj.MinNumBit = 0;
+			tmp = null;
 		}
 		// Архивация единичного файла
 
@@ -69,10 +69,7 @@ namespace LZW
 				}
 					WriteLastByte();
 
-					Zerosing(lzw);
-					fileStream.Close();
-					
-					
+					Zerosing(lzw, ref tail);
 			}
 		}
 
@@ -119,7 +116,6 @@ namespace LZW
 		//если нет присоединяет к последующему 
 		private void WriteLastByte()
 		{
-
 			string end = "100000000";
 			int a = lzw.MinNumBit-9;
 			for (var i = 0; i < a; i++)
@@ -174,8 +170,7 @@ namespace LZW
 					Console.WriteLine(output_path);
 					String PathToCreate = Path.GetDirectoryName(output_path);
 					DirectoryInfo di = Directory.CreateDirectory(PathToCreate);
-					bool check;
-					check = singleFileDecompess(fE, fs_);
+					singleFileDecompess(fE, fs_);
 
 
 				} while (fs_.Position != fs_.Length);
@@ -183,7 +178,7 @@ namespace LZW
 		}
 
 
-		private bool singleFileDecompess(string fE, FileStream fs_)
+		private void singleFileDecompess(string fE, FileStream fs_)
 		{
 			string tmp = null;
 
@@ -201,32 +196,20 @@ namespace LZW
 
 				current = current.Remove(0, lwz_decompress.MinNumBit);
 
-				//стрим основной части файла кроме последного байта
 				do
 				{
 					current += File_LZW.AddNullInFront(Convert.ToString(fs_.ReadByte(), 2), 8);
 					tmp = separateOnSeria(current);
-					if (tmp == "-2")
-					{
-						current = null;
-						lwz_decompress.Current = null;
-						lwz_decompress.Next = null;
-						lwz_decompress.DIC_CLEAN();
-						lwz_decompress.MinNumBit = 0;
-						temp = null;
-						return true;
-					}
-					else {
-						
+				
 						if (tmp != "-1")
 						{
 							current = tmp;
 						}
-					}
 
 				} while (tmp!="-2");
+				Zerosing(lwz_decompress, ref temp);
 			}
-			return false;
+
 		}
 
 
@@ -239,7 +222,6 @@ namespace LZW
 			}
 			else
 			{
-
 				lwz_decompress.Next = current.Substring(0, lwz_decompress.MinNumBit);
 				String outPut = OutPutBytesDecode();
 				if ((Convert.ToInt32(current.Substring(0, lwz_decompress.MinNumBit) ,2)==256))
