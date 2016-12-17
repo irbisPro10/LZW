@@ -9,8 +9,8 @@ namespace LZW
 		protected string current;
 		protected string next;
 		protected Hashtable dictionary = new Hashtable();
-		UInt32 index = 257;
-		int minBits;
+		protected int index = 257;
+		protected int minBits;
 		int curent_byte;
 	
 
@@ -39,6 +39,10 @@ namespace LZW
 			get
 			{
 				return minBits;
+			}
+			set
+			{
+				minBits = value;
 			}
 		}
 		public void DIC_CLEAN()

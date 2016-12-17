@@ -4,35 +4,10 @@ namespace LZW
 {
 	public class LZW_Decompress : LZW_Compress
 	{
-		int Index = 257;
-		int BitsInSeria;
 
-
-		public int bitsInSeria
-		{
-			set
-			{
-				BitsInSeria = value;
-
-			}
-
-			get
-			{
-				return BitsInSeria;
-			}
-
-		}
-
-		public int INDEX
-		{
-			set 
-			{
-				Index = value;
-			}
-		}
 		public void test()
 		{
-			Console.WriteLine(BitsInSeria + "\n");
+			Console.WriteLine(minBits + "\n");
 		}
 
 		public string getValOfDic(int Code)
@@ -50,32 +25,31 @@ namespace LZW
 				next = dictionary[Convert.ToInt32(next, 2)].ToString();
 				if (dictionary.Count < 3839)
 				{
-					dictionary.Add(Index, current + next.Substring(0, this.bitsInSeria));
-					Index++;
+					dictionary.Add(index, current + next.Substring(0, this.MinNumBit));
+					index++;
 				}
 				else
 				{
 					dictionary.Clear();
-					Index = 257;
+					index = 257;
 				}
 				result = current;
 				current = next;
-				//}
 			}
 
 			else
 			{
-				if (Convert.ToInt32(next, 2) == Index)
+				if (Convert.ToInt32(next, 2) == index)
 				{
 					if (dictionary.Count < 3839)
 					{
-						dictionary.Add(Index, current + current.Substring(0, this.bitsInSeria));
-						Index++;
+						dictionary.Add(index, current + current.Substring(0, this.MinNumBit));
+						index++;
 					}
 					else
 					{
 						dictionary.Clear();
-						Index = 257;
+						index = 257;
 					}
 					result = current;
 
@@ -86,14 +60,14 @@ namespace LZW
 				{
 					if (dictionary.Count < 3839)
 					{
-						dictionary.Add(Index, current + next.Substring(0, this.bitsInSeria));
-						Index++;
+						dictionary.Add(index, current + next.Substring(0, this.MinNumBit));
+						index++;
 					}
 
 					else
 					{
 						dictionary.Clear();
-						Index = 257;
+						index = 257;
 					}
 					result = current;
 					current = next;

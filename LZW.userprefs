@@ -7,9 +7,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Состояние: LZW">
     <Files>
       <File FileName="LZW\Program.cs" Line="11" Column="1" />
-      <File FileName="LZW\FileManage.cs" Line="247" Column="43" />
-      <File FileName="LZW\LZW_Compress.cs" Line="11" Column="12" />
-      <File FileName="LZW\LZW_Decompress.cs" Line="7" Column="6" />
+      <File FileName="LZW\FileManage.cs" Line="202" Column="59" />
+      <File FileName="LZW\LZW_Compress.cs" Line="45" Column="21" />
+      <File FileName="LZW\LZW_Decompress.cs" Line="37" Column="20" />
       <File FileName="Состояние: LZW" />
     </Files>
   </MonoDevelop.Ide.Workbench>
